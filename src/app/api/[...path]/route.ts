@@ -10,9 +10,7 @@ async function proxy(request: Request, context: RouteContext) {
   const { path } = await context.params;
   const backendUrl =
     process.env.BACKEND_URL ??
-    (process.env.NODE_ENV === "production"
-      ? "http://server:8000"
-      : "http://localhost:8000");
+    "http://localhost:8000";
   const targetUrl = new URL(
     `/api/${path.map(encodeURIComponent).join("/")}${new URL(request.url).search}`,
     backendUrl,
