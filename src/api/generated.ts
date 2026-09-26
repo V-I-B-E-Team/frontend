@@ -27,7 +27,7 @@ export const getGetUserUrl = (id: number,) => {
 
 
 
-  return `http://localhost:8000/api/users/${id}`
+  return `/api/users/${id}`
 }
 
 export const getUser = async (id: number, options?: RequestInit): Promise<getUserResponse> => {
