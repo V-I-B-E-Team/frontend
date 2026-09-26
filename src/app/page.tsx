@@ -13,6 +13,7 @@ export default function Home() {
   return (
     <main>
       <h1>My App</h1>
+      <h2>GH Action test</h2>
 
       {user && (
         <div>
