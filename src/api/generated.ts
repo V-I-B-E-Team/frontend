@@ -4,35 +4,33 @@
  * backend
  * OpenAPI spec version: 0.1.0
  */
-export interface User {
-  /** @minimum 0 */
-  id: number;
-  name: string;
+export interface Health {
+  status: string;
 }
 
-export type getUserResponse200 = {
-  data: User
+export type getHealthResponse200 = {
+  data: Health
   status: 200
 }
 
-export type getUserResponseSuccess = (getUserResponse200) & {
+export type getHealthResponseSuccess = (getHealthResponse200) & {
   headers: Headers;
 };
 ;
 
-export type getUserResponse = (getUserResponseSuccess)
+export type getHealthResponse = (getHealthResponseSuccess)
 
-export const getGetUserUrl = (id: number,) => {
-
-
+export const getGetHealthUrl = () => {
 
 
-  return `/api/users/${id}`
+
+
+  return `/api/v1/health`
 }
 
-export const getUser = async (id: number, options?: RequestInit): Promise<getUserResponse> => {
+export const getHealth = async ( options?: RequestInit): Promise<getHealthResponse> => {
 
-  const res = await fetch(getGetUserUrl(id),
+  const res = await fetch(getGetHealthUrl(),
   {
     ...options,
     method: 'GET'
@@ -44,6 +42,6 @@ export const getUser = async (id: number, options?: RequestInit): Promise<getUse
 
   const body = [204, 205, 304].includes(res.status) ? null : await res.text();
 
-  const data: getUserResponse['data'] = body ? JSON.parse(body) : {}
-  return { data, status: res.status, headers: res.headers } as getUserResponse
+  const data: getHealthResponse['data'] = body ? JSON.parse(body) : {}
+  return { data, status: res.status, headers: res.headers } as getHealthResponse
 }
