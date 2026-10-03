@@ -8,6 +8,12 @@ export interface Health {
   status: string;
 }
 
+export interface Team {
+  _id?: string;
+  members: string[];
+  name: string;
+}
+
 export type getHealthResponse200 = {
   data: Health
   status: 200
@@ -44,4 +50,51 @@ export const getHealth = async ( options?: RequestInit): Promise<getHealthRespon
 
   const data: getHealthResponse['data'] = body ? JSON.parse(body) : {}
   return { data, status: res.status, headers: res.headers } as getHealthResponse
+}
+
+
+
+export type getTeamResponse200 = {
+  data: Team
+  status: 200
+}
+
+export type getTeamResponse404 = {
+  data: void
+  status: 404
+}
+
+export type getTeamResponseSuccess = (getTeamResponse200) & {
+  headers: Headers;
+};
+export type getTeamResponseError = (getTeamResponse404) & {
+  headers: Headers;
+};
+
+export type getTeamResponse = (getTeamResponseSuccess | getTeamResponseError)
+
+export const getGetTeamUrl = () => {
+
+
+
+
+  return `/api/v1/team`
+}
+
+export const getTeam = async ( options?: RequestInit): Promise<getTeamResponse> => {
+
+  const res = await fetch(getGetTeamUrl(),
+  {
+    ...options,
+    method: 'GET'
+
+
+  }
+)
+
+
+  const body = [204, 205, 304].includes(res.status) ? null : await res.text();
+
+  const data: getTeamResponse['data'] = body ? JSON.parse(body) : {}
+  return { data, status: res.status, headers: res.headers } as getTeamResponse
 }
