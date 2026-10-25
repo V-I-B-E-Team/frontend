@@ -46,10 +46,13 @@ export default function StopsPage() {
 							stops.map((stop, idx) => (
 								<>
 									<Dialog onOpenChange={(open) => !open && router.push('/stops')} open={pathname.endsWith(stop.id.toString())} key={'stop-dialog-' + idx}>
-										<DialogContent className='bg-light'>
+										<DialogContent className='bg-light rounded'>
 											<DialogHeader>
 												<DialogTitle className='font-bold text-xl'>{stop.name}</DialogTitle>
 											</DialogHeader>
+											<div>
+												<Image className='rounded object-cover' width={400} height={300} src={stop.image_url} alt={stop.name} />
+											</div>
 										</DialogContent>
 									</Dialog>
 									<Link className='hover:scale-[1.03] transition-transform' href={`/stops/${stop.id}`} key={stop.id}>
