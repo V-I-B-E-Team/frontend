@@ -4,4 +4,21 @@
 	--color-secondary: oklch(0.89 0.14 151.75);
 	--color-light: #ffffff;
 	--color-dark: #1a1a1a;
+	--animate-shimmer: shimmer 2s linear infinite;
+}
+
+@keyframes shimmer {
+	0% {
+		background-position: 200% 0;
+	}
+
+	100% {
+		background-position: -200% 0;
+	}
+}
+
+@utility shimmer {
+	background: linear-gradient(105deg, transparent 30%, oklch(from var(--color-neutral-200) l c h / 0.3) 50%, transparent 70%);
+	background-size: 200% 100%;
+	@apply animate-shimmer!;
 }
