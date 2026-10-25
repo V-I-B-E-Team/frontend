@@ -6,6 +6,14 @@ const nextConfig: NextConfig = {
 	images: {
 		remotePatterns: [new URL('https://images.unsplash.com/**')],
 	},
+	rewrites: async () => {
+		return [
+			{
+				source: '/stops/:id',
+				destination: '/stops',
+			},
+		];
+	},
 };
 
 export default nextConfig;
